@@ -33,10 +33,12 @@ export default new Vuex.Store({
     search({ commit, state }) {
       if (state.isSearching) return;
 
+      // set store to initial state
       commit('setError', { error: null });
-      commit('setIsSearching', { isSearching: true });
       commit('setItems', { items: [] });
 
+      // Do search
+      commit('setIsSearching', { isSearching: true });
       searchGiphy({ q: state.query, limit: 5, offset: 0 }).then(
         ({ items }) => commit('setItems', { items })
       ).catch(
@@ -48,9 +50,11 @@ export default new Vuex.Store({
     searchMore({ commit, state }) {
       if (state.isSearching) return;
 
+      // clear error, if any
       commit('setError', { error: null });
-      commit('setIsSearching', { isSearching: true });
 
+      // Do search for more
+      commit('setIsSearching', { isSearching: true });
       searchGiphy({ q: state.query, limit: 5, offset: state.items.length }).then(
         ({ items }) => commit('addItems', { items })
       ).catch(

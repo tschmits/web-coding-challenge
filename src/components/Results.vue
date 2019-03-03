@@ -1,10 +1,10 @@
 <template>
   <div id="results">
-    <div v-for="item in items">
-      <img :src="item['images']['original']['url']">
+    <div class="image-container" v-for="item in items" :key="item.id">
+      <img :src="item['images']['original']['url']" >
     </div>
-    <div v-if="isSearching">Getting results...</div>
-    <div v-if="error">Oops! Something went wrong. Please try again.</div>
+    <div class="message" v-if="isSearching">Searching...</div>
+    <div class="message" v-if="error">Oops! Something went wrong. Please try again.</div>
   </div>
 </template>
 
@@ -32,8 +32,15 @@
 </script>
 
 <style scoped lang="scss">
-  img {
-    margin: 20px;
-    max-width: calc(100% - 40px);
+  .image-container {
+    img {
+      width: 480px;
+      margin: 20px;
+      max-width: calc(100% - 40px);
+    }
+  }
+
+  .message {
+    font-size: 30px;
   }
 </style>

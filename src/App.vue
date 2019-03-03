@@ -1,13 +1,16 @@
 <template>
   <div id="app">
+    <div>
+      <h2>Giphy Search</h2>
+    </div>
     <SearchBar msg="Enter query here"/>
     <Results/>
   </div>
 </template>
 
 <script>
-import Results from './components/Results.vue'
-import SearchBar from './components/SearchBar.vue'
+import Results from './components/Results.vue';
+import SearchBar from './components/SearchBar.vue';
 
 export default {
   name: 'app',
