@@ -1,10 +1,13 @@
 <template>
   <div id="results">
     <div class="image-container" v-for="item in items" :key="item.id">
-      <img :src="item['images']['original']['url']" >
+      <a :href="item.bitly_url">
+        <img :src="item.images.original.url" :alt="item.title">
+      </a>
     </div>
     <div class="message" v-if="isSearching">Searching...</div>
     <div class="message" v-if="error">Oops! Something went wrong. Please try again.</div>
+    <div class="message" v-if="reachedTheEnd">That's all folks!</div>
   </div>
 </template>
 
@@ -13,7 +16,7 @@
 
   export default {
     name: 'Results',
-    computed: mapState(['error', 'isSearching', 'items']),
+    computed: mapState(['error', 'isSearching', 'items', 'reachedTheEnd']),
     methods: {
       ...mapActions(['searchMore']),
       addInfiniteScroll () {
@@ -24,6 +27,18 @@
           }
         };
       },
+      removeInfiniteScroll () {
+        window.onscroll = null;
+      }
+    },
+    watch: {
+      reachedTheEnd(reachedTheEnd) {
+        if (reachedTheEnd) {
+          this.removeInfiniteScroll();
+        } else {
+          this.addInfiniteScroll();
+        }
+      }
     },
     mounted() {
       this.addInfiniteScroll();

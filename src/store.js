@@ -7,27 +7,31 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isSearching: false,
     error: null,
+    isSearching: false,
     items: [],
     query: "",
+    reachedTheEnd: false,
   },
   mutations: {
+    addItems(state, { items }) {
+      state.items = [...state.items, ...items];
+    },
     setError(state, { error }) {
       state.error = error;
     },
     setIsSearching(state, { isSearching }) {
       state.isSearching = isSearching;
     },
-    setQuery(state, { query }) {
-      state.query = query;
-    },
     setItems(state, { items }) {
       state.items = items;
     },
-    addItems(state, { items }) {
-      state.items = [...state.items, ...items];
-    }
+    setQuery(state, { query }) {
+      state.query = query;
+    },
+    setReachedTheEnd(state, { reachedTheEnd }) {
+      state.reachedTheEnd = reachedTheEnd;
+    },
   },
   actions: {
     search({ commit, state }) {
@@ -36,6 +40,7 @@ export default new Vuex.Store({
       // set store to initial state
       commit('setError', { error: null });
       commit('setItems', { items: [] });
+      commit('setReachedTheEnd', { reachedTheEnd: false });
 
       // Do search
       commit('setIsSearching', { isSearching: true });
@@ -56,7 +61,13 @@ export default new Vuex.Store({
       // Do search for more
       commit('setIsSearching', { isSearching: true });
       searchGiphy({ q: state.query, limit: 5, offset: state.items.length }).then(
-        ({ items }) => commit('addItems', { items })
+        ({ items }) => {
+          if (items.length) {
+            commit('addItems', { items });
+          } else {
+            commit('setReachedTheEnd', { reachedTheEnd: true });
+          }
+        }
       ).catch(
         error => commit('setError', { error })
       ).finally(

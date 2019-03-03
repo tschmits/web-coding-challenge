@@ -14,6 +14,9 @@ describe('store.js', () => {
   it('adds items on successful search for more', () => {
     // TODO: test for behavior
   });
+  it('sets reachedTheEnd on empty search for more', () => {
+    // TODO: test for behavior
+  });
   it('sets error on unsuccessful search for more', () => {
     // TODO: test for behavior
   });
