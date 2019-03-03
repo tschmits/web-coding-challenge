@@ -1,7 +1,7 @@
 <template>
   <form class="form" action="/" method="GET">
     <input id="query" :placeholder="msg" @submit="submitted" v-model="userInput">
-    <button type="submit" @click.prevent="submitted">searchGiphy</button>
+    <button type="submit" @click.prevent="submitted">Search</button>
   </form>
 </template>
 
@@ -35,10 +35,18 @@
 
 <style scoped lang="scss">
   button, input {
-    padding: 5px;
+    padding: 5px 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
     margin: 5px;
     font-size: 20px;
+  }
+
+  button {
+    width: 120px;
+  }
+
+  input{
+    width: 360px;
   }
 </style>

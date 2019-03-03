@@ -19,11 +19,17 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  text-align: center;
-
-  * {
-    box-sizing: border-box;
+  body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
-}
+
+  #app {
+    color: #42b983;
+    font-size: 20px;
+    text-align: center;
+
+    * {
+      box-sizing: border-box;
+    }
+  }
 </style>
